@@ -1,20 +1,39 @@
 #include "car.h"
 //www.elegoo.com
 //2016.09.12
+
 #define Echo A4
 #define Trig A5
 #define defaultVersion 3
+#define defaultSpeed 255
+
+//    The direction of the car's movement
+//  ENA   ENB   IN1   IN2   IN3   IN4   Description
+//  HIGH  HIGH  HIGH  LOW   LOW   HIGH  Car is runing forward
+//  HIGH  HIGH  LOW   HIGH  HIGH  LOW   Car is runing back
+//  HIGH  HIGH  LOW   HIGH  LOW   HIGH  Car is turning left
+//  HIGH  HIGH  HIGH  LOW   HIGH  LOW   Car is turning right
+//  HIGH  HIGH  LOW   LOW   LOW   LOW   Car is stoped
+//  HIGH  HIGH  HIGH  HIGH  HIGH  HIGH  Car is stoped
+//  LOW   LOW   N/A   N/A   N/A   N/A   Car is stoped
 
 int in1;
 int in2;
 int in3;
 int in4;
-int ENA;
+int ENA;  //th
 int ENB;
 
 //Constructor
 
-car::car() {} // set var to 0
+car::car() {
+  in1=0;
+  in2=0;
+  in3=0;
+  in4=0;
+  ENA=0;
+  ENB=0;
+}
 
 void car::init(int version){ //comments
     if(version == 1){
@@ -61,7 +80,6 @@ void car::forward(int speed){
   digitalWrite(in2,HIGH);
   digitalWrite(in3,LOW);
   digitalWrite(in4,HIGH);
-  Serial.println("Forward");
 }
 /*define back function*/
 void car::backward(int speed){
@@ -71,7 +89,6 @@ void car::backward(int speed){
   digitalWrite(in2,LOW);
   digitalWrite(in3,HIGH);
   digitalWrite(in4,LOW);
-  Serial.println("Back");
 }
 /*define left function*/
 void car::left(int speed){
@@ -81,7 +98,6 @@ void car::left(int speed){
   digitalWrite(in2,HIGH);
   digitalWrite(in3,HIGH);
   digitalWrite(in4,LOW);
-  Serial.println("Left");
 }
 /*define right function*/
 void car::right(int speed){
@@ -91,8 +107,24 @@ void car::right(int speed){
   digitalWrite(in2,LOW);
   digitalWrite(in3,LOW);
   digitalWrite(in4,HIGH);
-  Serial.println("Right");
 }
+
+void car::forward(){
+  forward(defaultSpeed);
+}
+
+void car::backward(){
+  forward(defaultSpeed);
+}
+
+void car::left(){
+  forward(defaultSpeed);
+}
+
+void car::right(){
+  forward(defaultSpeed);
+}
+
 
 void car::stop(){
   digitalWrite(ENA,LOW);
@@ -110,6 +142,24 @@ int car::getDistance(){
 
 void car::forwardT(int speed, int time){
   forward(speed);
+  delay(time);
+  stop();
+}
+
+void car::backwardT(int speed, int time){
+  backward(speed);
+  delay(time);
+  stop();
+}
+
+void car::leftT(int speed, int time){
+  left(speed);
+  delay(time);
+  stop();
+}
+
+void car::rightT(int speed, int time){
+  right(speed);
   delay(time);
   stop();
 }
