@@ -4,9 +4,10 @@
 class car
 {
   public:
-    car();
+    car();  //Constructor
     /**
-
+    This is the functiom to Initialze the Library.
+    Write the Version Number of your Robot into the brackets.
     */
     void  init(int version);
     void  init();
@@ -14,9 +15,16 @@ class car
     void  backward(int speed);
     void  left(int speed);
     void  right(int speed);
+    void  forward();
+    void  backward();
+    void  left();
+    void  right();
     void  stop();
-    void  forwardT(int speed, int time);
     int   getDistance();
+    void  forwardT(int speed, int time);
+    void  backwardT(int speed, int time);
+    void  leftT(int speed, int time);
+    void  rightT(int speed, int time);
   private:
 };
 
