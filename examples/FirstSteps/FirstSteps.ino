@@ -10,7 +10,7 @@ void setup(){
 void loop(){
   car.forward();  //go forward
   delay(1000);    //delay 1000 ms
-  car.back();     //go back
+  car.backward();     //go back
   delay(1000);    //delay 1000 ms
   car.left();     //turning left
   delay(1000);    //delay 1000 ms
