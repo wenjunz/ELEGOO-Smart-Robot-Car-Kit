@@ -9,51 +9,44 @@
       <img src="/assets/first.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
-     <br><br><br><br><br><br><br><br><br>
 
 2. Download the leatest Release:
 
     <img src="/assets/first.png"
     alt="Markdown Monster icon"
     style="float: left; margin-right: 10px;" />
-    <br><br><br><br><br><br><br><br><br>
 
 3. Go to Arduino IDE and there go to Sketch:
 
     <img src="/assets/third.png" alt="Markdown Monster icon" style="float: left; margin-right: 10px;" />
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 4. Select Include Library, then Include from ZIP file and Select the ZIP archive that you've downloaded from the repo:
 
   <img src="/assets/forth.png"
   alt="Markdown Monster icon"
   style="float: left; margin-right: 10px;" />
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ### Include Library
 
 1. Go to Arduino IDE and there go to Sketch:
 
     <img src="/assets/third.png" alt="Markdown Monster icon" style="float: left; margin-right: 10px;" />
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 2. Select Include Library, then select Car:
 
   <img src="/assets/forth.png"
   alt="Markdown Monster icon"
   style="float: left; margin-right: 10px;" />
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 3. Now it should look like this:
 
   <img src="/assets/fifth.png"
   alt="Markdown Monster icon"
   style="float: left; margin-right: 10px;" />
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ### First Steps
 
-
+### First Commands
 
 <!-- CONTRIBUTING -->
 ## Contributing
