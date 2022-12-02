@@ -2,10 +2,7 @@
 //www.elegoo.com
 //2016.09.12
 
-#define Echo A4
-#define Trig A5
-#define defaultVersion 3
-#define defaultSpeed 255
+
 
 //    The direction of the car's movement
 //  ENA   ENB   IN1   IN2   IN3   IN4   Description
@@ -21,7 +18,7 @@ int in1;
 int in2;
 int in3;
 int in4;
-int ENA;  //th
+int ENA;
 int ENB;
 
 //Constructor
@@ -35,7 +32,7 @@ car::car() {
   ENB=0;
 }
 
-void car::init(int version){ //comments
+void car::init(int version){
     if(version == 1){
       in1=9;
       in2=8;
@@ -131,34 +128,34 @@ void car::stop(){
   digitalWrite(ENB,LOW);
 }
 
-int car::getDistance(){
-  digitalWrite(Trig, LOW);
-  delayMicroseconds(5);
-  digitalWrite(Trig, HIGH);
-  delayMicroseconds(1);
-  digitalWrite(Trig, LOW);
-  return (int)pulseIn(Echo, HIGH) / 58;
+int car::getDistance() {
+    digitalWrite(Trig, LOW);
+    delayMicroseconds(2);
+    digitalWrite(Trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(Trig, LOW);
+    return (int)pulseIn(Echo, HIGH) / 58;
 }
 
-void car::forwardT(int speed, int time){
+void car::forwardT(int speed, float time){
   forward(speed);
   delay(time);
   stop();
 }
 
-void car::backwardT(int speed, int time){
+void car::backwardT(int speed, float time){
   backward(speed);
   delay(time);
   stop();
 }
 
-void car::leftT(int speed, int time){
+void car::leftT(int speed, float time){
   left(speed);
   delay(time);
   stop();
 }
 
-void car::rightT(int speed, int time){
+void car::rightT(int speed, float time){
   right(speed);
   delay(time);
   stop();
