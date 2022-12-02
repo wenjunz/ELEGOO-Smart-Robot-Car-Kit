@@ -137,25 +137,25 @@ int car::getDistance() {
     return (int)pulseIn(Echo, HIGH) / 58;
 }
 
-void car::forwardT(int speed, int time){
+void car::forwardT(int speed, float time){
   forward(speed);
   delay(time);
   stop();
 }
 
-void car::backwardT(int speed, int time){
+void car::backwardT(int speed, float time){
   backward(speed);
   delay(time);
   stop();
 }
 
-void car::leftT(int speed, int time){
+void car::leftT(int speed, float time){
   left(speed);
   delay(time);
   stop();
 }
 
-void car::rightT(int speed, int time){
+void car::rightT(int speed, float time){
   right(speed);
   delay(time);
   stop();
