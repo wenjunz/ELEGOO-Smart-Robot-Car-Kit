@@ -1,6 +1,13 @@
 #ifndef car_H
 #define car_H
 #include <Arduino.h>
+
+#define Echo A4
+#define Trig A5
+#define defaultVersion 3
+#define defaultSpeed 255
+
+
 class car
 {
   public:

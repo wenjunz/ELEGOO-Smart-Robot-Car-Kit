@@ -2,10 +2,7 @@
 //www.elegoo.com
 //2016.09.12
 
-#define Echo A4
-#define Trig A5
-#define defaultVersion 3
-#define defaultSpeed 255
+
 
 //    The direction of the car's movement
 //  ENA   ENB   IN1   IN2   IN3   IN4   Description
@@ -21,7 +18,7 @@ int in1;
 int in2;
 int in3;
 int in4;
-int ENA;  //th
+int ENA;
 int ENB;
 
 //Constructor
@@ -35,7 +32,7 @@ car::car() {
   ENB=0;
 }
 
-void car::init(int version){ //comments
+void car::init(int version){ 
     if(version == 1){
       in1=9;
       in2=8;
