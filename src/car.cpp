@@ -32,7 +32,7 @@ car::car() {
   ENB=0;
 }
 
-void car::init(int version){ 
+void car::init(int version){
     if(version == 1){
       in1=9;
       in2=8;
@@ -128,13 +128,13 @@ void car::stop(){
   digitalWrite(ENB,LOW);
 }
 
-int car::getDistance(){
-  digitalWrite(Trig, LOW);
-  delayMicroseconds(5);
-  digitalWrite(Trig, HIGH);
-  delayMicroseconds(1);
-  digitalWrite(Trig, LOW);
-  return (int)pulseIn(Echo, HIGH) / 58;
+int car::getDistance() {
+    digitalWrite(Trig, LOW);
+    delayMicroseconds(2);
+    digitalWrite(Trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(Trig, LOW);
+    return (int)pulseIn(Echo, HIGH) / 58;
 }
 
 void car::forwardT(int speed, int time){
