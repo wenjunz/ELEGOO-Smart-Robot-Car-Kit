@@ -12,7 +12,7 @@
 
 2. Download the leatest Release:
 
-    <img src="/assets/first.png"
+    <img src="/assets/second.png"
     alt="Markdown Monster icon"
     style="float: left; margin-right: 10px;" />
 
