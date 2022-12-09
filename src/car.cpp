@@ -14,12 +14,41 @@
 //  HIGH  HIGH  HIGH  HIGH  HIGH  HIGH  Car is stoped
 //  LOW   LOW   N/A   N/A   N/A   N/A   Car is stoped
 
+
+//    Left motor truth table
+//  ENA         IN1               IN2         Description
+//  LOW   Not Applicable    Not Applicable    Motor is off
+//  HIGH        LOW               LOW         Motor is stopped (brakes)
+//  HIGH        HIGH              LOW         Motor is on and turning forwards
+//  HIGH        LOW               HIGH        Motor is on and turning backwards
+//  HIGH        HIGH              HIGH        Motor is stopped (brakes)
+
+//    Right motor truth table
+//  ENB         IN3             IN4         Description
+//  LOW   Not Applicable   Not Applicable   Motor is off
+//  HIGH        LOW             LOW         Motor is stopped (brakes)
+//  HIGH        LOW             HIGH        Motor is on and turning forwards
+//  HIGH        HIGH            LOW         Motor is on and turning backwards
+//  HIGH        HIGH            HIGH        Motor is stopped (brakes)
+
+//    The direction of the car's movement
+//  Left motor    Right motor     Description
+//  stop(off)     stop(off)       Car is stopped
+//  forward       forward         Car is running forwards
+//  forward       backward        Car is turning right
+//  backward      forward         Car is turning left
+//  backward      backward        Car is running backwards
+
+
 int in1;
 int in2;
 int in3;
 int in4;
 int ENA;
 int ENB;
+
+int duration;
+int cm;
 
 //Constructor
 
@@ -122,19 +151,30 @@ void car::right(){
   forward(defaultSpeed);
 }
 
-
-void car::stop(){
+void car::off(){
   digitalWrite(ENA,LOW);
   digitalWrite(ENB,LOW);
 }
 
+void car::stop(){
+  analogWrite(ENA,HIGH);
+  analogWrite(ENB,HIGH);
+  digitalWrite(in1,LOW);
+  digitalWrite(in2,LOW);
+  digitalWrite(in3,LOW);
+  digitalWrite(in4,LOW);
+}
+
 int car::getDistance() {
     digitalWrite(Trig, LOW);
-    delayMicroseconds(2);
+    delayMicroseconds(5);
     digitalWrite(Trig, HIGH);
     delayMicroseconds(10);
     digitalWrite(Trig, LOW);
-    return (int)pulseIn(Echo, HIGH) / 58;
+    //return (int)pulseIn(Echo, HIGH) / 58;
+    duration = pulseIn(Echo, HIGH);
+    cm = (duration/2)/29.1;
+    return cm;
 }
 
 void car::forwardT(int speed, float time){
