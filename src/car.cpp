@@ -21,6 +21,7 @@ int in4;
 int ENA;
 int ENB;
 
+long duration, cm;
 //Constructor
 
 car::car() {
@@ -63,6 +64,8 @@ void car::init(int version){
     pinMode(in4,OUTPUT);
     pinMode(ENA,OUTPUT);
     pinMode(ENB,OUTPUT);
+    pinMode(Trig, OUTPUT);
+    pinMode(Echo, INPUT);
 }
 
 void car::init(){
@@ -128,13 +131,15 @@ void car::stop(){
   digitalWrite(ENB,LOW);
 }
 
-int car::getDistance() {
-    digitalWrite(Trig, LOW);
-    delayMicroseconds(2);
-    digitalWrite(Trig, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(Trig, LOW);
-    return (int)pulseIn(Echo, HIGH) / 58;
+long car::getDistance() {
+  digitalWrite(Trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(Trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig, LOW);
+  duration = pulseIn(Echo, HIGH);
+  cm = (duration/2) / 29.1;
+  return cm;
 }
 
 void car::forwardT(int speed, float time){
