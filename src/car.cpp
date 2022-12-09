@@ -47,6 +47,9 @@ int in4;
 int ENA;
 int ENB;
 
+int duration;
+int cm;
+
 //Constructor
 
 car::car() {
@@ -164,11 +167,14 @@ void car::stop(){
 
 int car::getDistance() {
     digitalWrite(Trig, LOW);
-    delayMicroseconds(2);
+    delayMicroseconds(5);
     digitalWrite(Trig, HIGH);
     delayMicroseconds(10);
     digitalWrite(Trig, LOW);
-    return (int)pulseIn(Echo, HIGH) / 58;
+    //return (int)pulseIn(Echo, HIGH) / 58;
+    duration = pulseIn(Echo, HIGH);
+    cm = (duration/2)/29.1;
+    return cm;
 }
 
 void car::forwardT(int speed, float time){
