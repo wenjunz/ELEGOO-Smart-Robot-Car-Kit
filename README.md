@@ -48,6 +48,13 @@
 
 ### First Commands
 
+| **Command** | **Explenation** |
+|:---:|---|
+| car.init() | This argument is needed in every code. It is to initialize the the library.  In the brackets you can put the version of your robot. The default version is 3. |
+| car.forward()<br>  car.backward()<br>  car.left()<br>  car.right()<br>  car.stop() | These arguments explain themself. Into the brackets you can put a number between 1 and 256 for the speed. The default speed is 255. |
+| car.forwardT() <br>   car.backwardT() <br>   car.leftT() <br>   car.rightT() | The arguments function just like the others but you have to put the time and the speed into the brackets. <br> With a syntax like this: <br> ``` car.forwardT(SPEED, TIME); ``` <br>You can choose a number between 1 and 255.  |
+| car.getDistance() | This is a function to get the distance from the Ultrasonic sensor. It returns it as an Integer. |
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
