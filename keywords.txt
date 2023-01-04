@@ -19,7 +19,7 @@ left            KEYWORD2
 right           KEYWORD2
 stop            KEYWORD2
 forwardT        KEYWORD2
-backwardT       KEYWORD2
+backT           KEYWORD2
 leftT           KEYWORD2
 rightT          KEYWORD2
 getDistance     KEYWORD2

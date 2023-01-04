@@ -19,11 +19,11 @@ class car
     void  init(int version);
     void  init();
     void  forward(int speed);
-    void  backward(int speed);
+    void  back(int speed);
     void  left(int speed);
     void  right(int speed);
     void  forward();
-    void  backward();
+    void  back();
     void  left();
     void  right();
     void  stop();

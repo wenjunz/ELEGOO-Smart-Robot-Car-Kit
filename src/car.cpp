@@ -108,7 +108,7 @@ void car::forward(int speed){
   digitalWrite(in4,HIGH);
 }
 /*define back function*/
-void car::backward(int speed){
+void car::back(int speed){
   analogWrite(ENA,speed);
   analogWrite(ENB,speed);
   digitalWrite(in1,HIGH);
@@ -139,7 +139,7 @@ void car::forward(){
   forward(defaultSpeed);
 }
 
-void car::backward(){
+void car::back(){
   forward(defaultSpeed);
 }
 
