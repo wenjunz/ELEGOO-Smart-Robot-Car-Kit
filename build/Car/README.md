@@ -55,6 +55,7 @@
 | car.forwardT() <br>   car.backwardT() <br>   car.leftT() <br>   car.rightT() | The arguments function just like the others but you have to put the time and the speed into the brackets. <br> With a syntax like this: <br> ``` car.forwardT(SPEED, TIME); ``` <br>You can choose a number between 1 and 255.  |
 | car.getDistance() | This is a function to get the distance from the Ultrasonic sensor. It returns it as an Integer. |
 
+
 <!-- CONTRIBUTING -->
 ## Contributing
 

@@ -92,6 +92,7 @@ void car::init(int version){
     pinMode(ENB,OUTPUT);
     pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
+    pinMode(LED, OUTPUT);
 }
 
 void car::init(){
