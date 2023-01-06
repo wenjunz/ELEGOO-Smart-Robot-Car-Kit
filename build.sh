@@ -37,22 +37,19 @@ printf "\r copying..............."
 cp build/assets/README.md build/Car/ &> /dev/null 
 printf "\r copying................\n"
 
-cd build || exit &> /dev/null
-zip Car Car/* &> /dev/null
-cd .. &> /dev/null
-
-
 printf "\r building"
-
-
+cd build || exit &> /dev/null
 printf "\r building."
-arduino-cli lib install --zip-path build/Car.zip &> /dev/null
+zip Car Car/* &> /dev/null
 printf "\r building.."
-
-cd build || exit
+cd .. &> /dev/null
 printf "\r building..."
+arduino-cli lib install --zip-path build/Car.zip &> /dev/null
+printf "\r building...."
+cd build || exit
+printf "\r building....."
 cp -r Car ~/Arduino/libraries/
-printf "\r building....\n"
+printf "\r building......\n"
 
 if ! command -v arduino-cli &> /dev/null
 then
