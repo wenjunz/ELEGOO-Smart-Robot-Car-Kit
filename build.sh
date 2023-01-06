@@ -14,17 +14,18 @@ cp library.properties build/Car/
 cp README.md build/Car/
 rm build/Car/docs/ELEGOO*
 
-cd build
+cd build || exit
 zip Car Car/*
 cd ..
 
 if ! command -v arduino-cli &> /dev/null
 then
-    echo "arduino-cli: could not be found \n !!!Please install it!!! \n Use sudo snap install arduino-cli"
+    printf "arduino-cli: could not be found \n !!!Please install it!!! \n Use sudo snap install arduino-cli"
     exit
 fi
 
 arduino-cli lib install --zip-path build/Car.zip
 
-cd build
+cd build || exit
 cp -r Car ~/Arduino/libraries/
+

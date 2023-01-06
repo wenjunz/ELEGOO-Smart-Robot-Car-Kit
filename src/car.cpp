@@ -90,8 +90,8 @@ void car::init(int version){
     pinMode(in4,OUTPUT);
     pinMode(ENA,OUTPUT);
     pinMode(ENB,OUTPUT);
-    pinMode(Trig, OUTPUT);
-    pinMode(Echo, INPUT);
+    pinMode(trig, OUTPUT);
+    pinMode(echo, INPUT);
 }
 
 void car::init(){
@@ -151,18 +151,18 @@ void car::right(){
   forward(defaultSpeed);
 }
 
-void car::off(){
+void car::stop(){
   digitalWrite(ENA,LOW);
   digitalWrite(ENB,LOW);
 }
 
 long car::getDistance() {
-  digitalWrite(Trig, LOW);
+  digitalWrite(trig, LOW);
   delayMicroseconds(5);
-  digitalWrite(Trig, HIGH);
+  digitalWrite(trig, HIGH);
   delayMicroseconds(10);
-  digitalWrite(Trig, LOW);
-  duration = pulseIn(Echo, HIGH);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo, HIGH);
   cm = (duration/2) / 29.1;
   return cm;
 }
@@ -173,8 +173,8 @@ void car::forwardT(int speed, float time){
   stop();
 }
 
-void car::backwardT(int speed, float time){
-  backward(speed);
+void car::backT(int speed, float time){
+  back(speed);
   delay(time);
   stop();
 }

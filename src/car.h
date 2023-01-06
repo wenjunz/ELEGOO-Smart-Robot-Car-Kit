@@ -2,8 +2,8 @@
 #define car_H
 #include <Arduino.h>
 
-#define Echo A4
-#define Trig A5
+#define echo A4
+#define trig A5
 #define defaultVersion 3
 #define defaultSpeed 255
 
@@ -27,9 +27,9 @@ class car
     void  left();
     void  right();
     void  stop();
-    int   getDistance();
+    long  getDistance();
     void  forwardT(int speed, float time);
-    void  backwardT(int speed, float time);
+    void  backT(int speed, float time);
     void  leftT(int speed, float time);
     void  rightT(int speed, float time);
   private:
