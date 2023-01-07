@@ -4,51 +4,51 @@
 
 
 printf "\r copying"
-rm build/Car.zip &> /dev/null
+rm build/Elegoo.zip &> /dev/null
 printf "\r copying."
-rm -f -r build/Car/
+rm -f -r build/Elegoo/
 printf "\r copying.."
-mkdir build/Car/ &> /dev/null
+mkdir build/Elegoo/ &> /dev/null
 printf "\r copying..."
-sudo chown -R manuel build/Car/ &> /dev/null
+sudo chown -R manuel build/Elegoo/ &> /dev/null
 printf "\r copying...."
-cp -r -a docs  build/Car/ &> /dev/null
+cp -r -a docs  build/Elegoo/ &> /dev/null
 printf "\r copying....."
-cp -r -a examples build/Car/ &> /dev/null
+cp -r -a examples build/Elegoo/ &> /dev/null
 printf "\r copying......"
-cp -r -a src build/Car/ &> /dev/null
+cp -r -a src build/Elegoo/ &> /dev/null
 printf "\r copying......."
-cp AUTHORS build/Car/ &> /dev/null
+cp AUTHORS build/Elegoo/ &> /dev/null
 printf "\r copying........"
-cp keywords.txt build/Car/ &> /dev/null
+cp keywords.txt build/Elegoo/ &> /dev/null
 printf "\r copying........."
-cp library.properties build/Car/ &> /dev/null
+cp library.properties build/Elegoo/ &> /dev/null
 printf "\r copying.........."
-cp README.md build/Car/ &> /dev/null
+cp README.md build/Elegoo/ &> /dev/null
 printf "\r copying..........."
-cp LICENSE build/Car/ &> /dev/null
+cp LICENSE build/Elegoo/ &> /dev/null
 printf "\r copying............"
-rm build/Car/docs/ELEGOO* &> /dev/null
+rm build/Elegoo/docs/ELEGOO* &> /dev/null
 printf "\r copying............."
-rm build/Car/docs/README.md &> /dev/null
+rm build/Elegoo/docs/README.md &> /dev/null
 printf "\r copying.............."
-rm build/Car/README.md &> /dev/null
+rm build/Elegoo/README.md &> /dev/null
 printf "\r copying..............."
-cp build/assets/README.md build/Car/ &> /dev/null 
+cp build/assets/README.md build/Elegoo/ &> /dev/null 
 printf "\r copying................\n"
 
 printf "\r building"
 cd build || exit &> /dev/null
 printf "\r building."
-zip Car Car/* &> /dev/null
+zip Elegoo Elegoo/* &> /dev/null
 printf "\r building.."
 cd .. &> /dev/null
 printf "\r building..."
-arduino-cli lib install --zip-path build/Car.zip &> /dev/null
+arduino-cli lib install --zip-path build/Elegoo.zip &> /dev/null
 printf "\r building...."
 cd build || exit
 printf "\r building....."
-cp -r Car ~/Arduino/libraries/
+cp -r Elegoo ~/Arduino/libraries/
 printf "\r building......\n"
 
 if ! command -v arduino-cli &> /dev/null
