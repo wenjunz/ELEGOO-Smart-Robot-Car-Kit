@@ -35,12 +35,16 @@ printf "\r copying.............."
 rm build/Elegoo/README.md &> /dev/null
 printf "\r copying..............."
 cp build/assets/README.md build/Elegoo/ &> /dev/null 
-printf "\r copying................\n"
+printf "\r copying................"
+cp -r -a src/Elegoo.h  build/Elegoo/src &> /dev/null
+printf "\r copying................."
+cp -r -a src/Elegoo.cpp build/Elegoo/src &> /dev/null
+printf "\r copying..................\n"
 
 printf "\r building"
 cd build || exit &> /dev/null
 printf "\r building."
-zip Elegoo Elegoo/* &> /dev/null
+zip -r Elegoo Elegoo &> /dev/null
 printf "\r building.."
 cd .. &> /dev/null
 printf "\r building..."

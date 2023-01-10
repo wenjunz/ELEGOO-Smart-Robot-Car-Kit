@@ -1,6 +1,7 @@
 #ifndef car_H
 #define car_H
 #include <Arduino.h>
+#include <Servo.h>
 
 //--------Ultrasonic Sensor---------//
 #define echo A4
@@ -8,6 +9,11 @@
 
 #define defaultVersion 3
 #define defaultSpeed 255
+
+//-------Line Tracking Pins--------//
+#define LineTeacking_Pin_Right  10
+#define LineTeacking_Pin_Middle 4
+#define LineTeacking_Pin_Left   2
 
 //---------- IR REMOTE -------------//
 #define RECV_PIN  12        //Infrared signal receiving pin
@@ -59,6 +65,14 @@ class car
     void  backT(int speed, float time);
     void  leftT(int speed, float time);
     void  rightT(int speed, float time);
+    unsigned long getIR();
+    char getIRdec();
+    void remote();
+    void remoteT(int time);
+    int   getLightR();
+    int   getLightM();
+    int   getLightL();
+    void  line();
   private:
 };
 
