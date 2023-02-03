@@ -1,6 +1,4 @@
-#include <Arduino.h>
 #include "Elegoo.h"
-#include <Servo.h>
 
 
 //www.elegoo.com
@@ -41,11 +39,11 @@
 //  forward       forward         Car is running forwards
 //  forward       backward        Car is turning right
 //  backward      forward         Car is turning left
-//  backward      backward        Car is running backwards
+//  backward      backward        elegoo is running backwards
 
 //Constructor
 
-car::car(int version) {
+elegoo::elegoo(int version) {
   if(version == 1){
     in1=9;
     in2=8;
@@ -83,15 +81,15 @@ car::car(int version) {
   pinMode(LineTeacking_Pin_Right, INPUT);
   pinMode(LineTeacking_Pin_Middle, INPUT);
   pinMode(LineTeacking_Pin_Left, INPUT);
-  libServo.attach(3);
-  IRrecv irrecv(RECV_PIN);
-  Servo libServo;
-  irrecv->begin(RECV_PIN, LED);
+  //libServo->attach(3);
+  //IRrecv irrecv(RECV_PIN);
+  //Servo libServo;
+  //irrecv->begin(RECV_PIN, LED);
 }
 
 
 /*define forward function*/
-void car::forward(int speed){
+void elegoo::forward(int speed){
   analogWrite(ENA,speed);
   analogWrite(ENB,speed);
   digitalWrite(in1,LOW);
@@ -100,7 +98,7 @@ void car::forward(int speed){
   digitalWrite(in4,HIGH);
 }
 /*define back function*/
-void car::back(int speed){
+void elegoo::back(int speed){
   analogWrite(ENA,speed);
   analogWrite(ENB,speed);
   digitalWrite(in1,HIGH);
@@ -109,7 +107,7 @@ void car::back(int speed){
   digitalWrite(in4,LOW);
 }
 /*define left function*/
-void car::left(int speed){
+void elegoo::left(int speed){
   analogWrite(ENA,speed);
   analogWrite(ENB,speed);
   digitalWrite(in1,LOW);
@@ -118,7 +116,7 @@ void car::left(int speed){
   digitalWrite(in4,LOW);
 }
 /*define right function*/
-void car::right(int speed){
+void elegoo::right(int speed){
   analogWrite(ENA,HIGH);
   analogWrite(ENB,HIGH);
   digitalWrite(in1,HIGH);
@@ -127,52 +125,52 @@ void car::right(int speed){
   digitalWrite(in4,HIGH);
 }
 
-void car::forward(){
+void elegoo::forward(){
   forward(defaultSpeed);
 }
 
-void car::back(){
+void elegoo::back(){
   forward(defaultSpeed);
 }
 
-void car::left(){
+void elegoo::left(){
   forward(defaultSpeed);
 }
 
-void car::right(){
+void elegoo::right(){
   forward(defaultSpeed);
 }
 
-void car::stop(){
+void elegoo::stop(){
   digitalWrite(ENA,LOW);
   digitalWrite(ENB,LOW);
 }
 
-void car::forwardT(int speed, float time){
+void elegoo::forwardT(int speed, float time){
   forward(speed);
   delay(time);
   stop();
 }
 
-void car::backT(int speed, float time){
+void elegoo::backT(int speed, float time){
   back(speed);
   delay(time);
   stop();
 }
 
-void car::leftT(int speed, float time){
+void elegoo::leftT(int speed, float time){
   left(speed);
   delay(time);
   stop();
 }
 
-void car::rightT(int speed, float time){
+void elegoo::rightT(int speed, float time){
   right(speed);
   delay(time);
   stop();
 }
 
-long car::getDistance() {
+long elegoo::getDistance() {
   digitalWrite(trig, LOW);
   delayMicroseconds(5);
   digitalWrite(trig, HIGH);
@@ -184,15 +182,15 @@ long car::getDistance() {
 }
 
 
-unsigned long car::getIR(){
-  if (irrecv->decode()) {
-    irrecv->resume();
-    unsigned long var = IrReceiver.decodedIRData.decodedRawData;
-    return var;
-  }
+unsigned long elegoo::getIR(){
+//  if (irrecv->decode()) {
+//    irrecv->resume();
+    //unsigned long var = IrReceiver.decodedIRData.decodedRawData;
+    //return var;
+//  }
 }
 
-char car::getIRdec(){
+char elegoo::getIRdec(){
   switch(getIR()){
     case FORWARD: return 1;   break;
     case BACK:    return 2;   break;
@@ -205,7 +203,7 @@ char car::getIRdec(){
   }
 }
 
-void car::remoteIR(){
+void elegoo::remoteIR(){
   int preMillis;
   switch(getIRdec()){
     case 1: 
@@ -237,43 +235,43 @@ void car::remoteIR(){
   }
 }
 
-void car::remoteIRT(int time){
+void elegoo::remoteIRT(int time){
   for(int i = time; i > 0; i--){
     remote();
     delay(1);
   }
 }
 
-int car::getLightR(){
+int elegoo::getLightR(){
   int r = !digitalRead(10);
   return r;
 }
 
-int car::getLightM(){
+int elegoo::getLightM(){
   int m = !digitalRead(4);
   return m;
 }
 
-int car::getLightL(){
+int elegoo::getLightL(){
   int l = !digitalRead(2);
   return l;
 }
 
-void car::line(){
-  if(car::getLightM() == 0){
+void elegoo::line(){
+  if(elegoo::getLightM() == 0){
     forward();
   }
-  else if(car::getLightR() == 0) {
+  else if(elegoo::getLightR() == 0) {
     right();
-    while(car::getLightR() == 0);
+    while(elegoo::getLightR() == 0);
   }
-  else if(car::getLightL() == 0) {
+  else if(elegoo::getLightL() == 0) {
     left();
-    while(car::getLightL() == 0);
+    while(elegoo::getLightL() == 0);
   }
 }
 
-void car::delay(unsigned long time){
+void elegoo::delay(unsigned long time){
   for(unsigned long i = 0; i < time; i++) {
     getBTdec();
     getIRdec();
@@ -281,14 +279,14 @@ void car::delay(unsigned long time){
   }
 }
 
-unsigned long car::getBT(){
+unsigned long elegoo::getBT(){
   if(Serial.available()){
     unsigned long val = Serial.read();
     return val;
   }
 }
 
-char car::getBTdec(){
+char elegoo::getBTdec(){
   int dec;
   switch(getBT()){
     case FORWARD: dec = 'f'; return dec;   break;
@@ -311,7 +309,7 @@ char car::getBTdec(){
 }
 
 /*
-float car::regler(float ist, float soll, int p_faktor, ){
+float elegoo::regler(float ist, float soll, int p_faktor, ){
   float abweichung = soll - ist;
   float ergebnis  = (abweichung * p_factor);
   return ergebnis;

@@ -43,10 +43,10 @@
 #define KEY_HASH  16732845
 
 
-class car
+class elegoo
 {
   public:
-    car(int version);  //Constructor
+    elegoo(int version);  //Constructor
     /**
     This is the functiom to Initialze the Library.
     Write the Version Number of your Robot into the brackets.
@@ -79,8 +79,7 @@ class car
     void remote();
     float pregler(float ist, float soll, int p_faktor);
   private:
-    IRrecv *irrecv;
-    Servo  *libServo;
+   // Servo  *libServo;
     int in1 = 0;
     int in2 = 0;
     int in3 = 0;
@@ -89,8 +88,8 @@ class car
     int ENB = 0;
 };
 
-#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_CAR)
-extern car car;
-#endif
+//#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_CAR)
+//extern elegoo car;
+//#endif
 
 #endif
