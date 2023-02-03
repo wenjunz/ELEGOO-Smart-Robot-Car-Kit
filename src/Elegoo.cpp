@@ -1,7 +1,7 @@
-#include "Arduino.h"
+#include <Arduino.h>
 #include "Elegoo.h"
 #include <Servo.h>
-#include <IRremote.h>
+
 
 //www.elegoo.com
 //2016.09.12
@@ -43,30 +43,9 @@
 //  backward      forward         Car is turning left
 //  backward      backward        Car is running backwards
 
-
-int in1;
-int in2;
-int in3;
-int in4;
-int ENA;
-int ENB;
-
-long duration, cm;
-
-Servo libServo;
-
 //Constructor
 
-car::car() {
-  in1=0;
-  in2=0;
-  in3=0;
-  in4=0;
-  ENA=0;
-  ENB=0;
-}
-
-void car::init(int version){
+car::car(int version) {
   if(version == 1){
     in1=9;
     in2=8;
@@ -105,12 +84,11 @@ void car::init(int version){
   pinMode(LineTeacking_Pin_Middle, INPUT);
   pinMode(LineTeacking_Pin_Left, INPUT);
   libServo.attach(3);
-  IrReceiver.begin(RECV_PIN, LED); // Start the receiver
+  IRrecv irrecv(RECV_PIN);
+  Servo libServo;
+  irrecv->begin(RECV_PIN, LED);
 }
 
-void car::init(){
-  car::init(defaultVersion);
-}
 
 /*define forward function*/
 void car::forward(int speed){
@@ -170,17 +148,6 @@ void car::stop(){
   digitalWrite(ENB,LOW);
 }
 
-long car::getDistance() {
-  digitalWrite(trig, LOW);
-  delayMicroseconds(5);
-  digitalWrite(trig, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trig, LOW);
-  duration = pulseIn(echo, HIGH);
-  cm = (duration/2) / 29.1;
-  return cm;
-}
-
 void car::forwardT(int speed, float time){
   forward(speed);
   delay(time);
@@ -205,9 +172,21 @@ void car::rightT(int speed, float time){
   stop();
 }
 
+long car::getDistance() {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  long duration = pulseIn(echo, HIGH);
+  long cm = (duration/2) / 29.1;
+  return cm;
+}
+
+
 unsigned long car::getIR(){
-  if (IrReceiver.decode()) {
-    IrReceiver.resume();
+  if (irrecv->decode()) {
+    irrecv->resume();
     unsigned long var = IrReceiver.decodedIRData.decodedRawData;
     return var;
   }
@@ -221,7 +200,7 @@ char car::getIRdec(){
     case RIGHT:   return 4;   break;
     case STOP:    return 5;   break;
     case KEY1:    return 6;   break;
-    case KEY1:    return 7;   break;
+    case KEY2:    return 7;   break;
     default:                  break;
   }
 }
@@ -295,7 +274,7 @@ void car::line(){
 }
 
 void car::delay(unsigned long time){
-  for(unsigned long i = 0; i < t; i++) {
+  for(unsigned long i = 0; i < time; i++) {
     getBTdec();
     getIRdec();
     delay(1);
@@ -310,21 +289,31 @@ unsigned long car::getBT(){
 }
 
 char car::getBTdec(){
+  int dec;
   switch(getBT()){
-    case FORWARD: return f;   break;
-    case BACK:    return b;   break;
-    case LEFT:    return l;   break;
-    case RIGHT:   return r;   break;
-    case STOP:    return s;   break;
-    case KEY0:    return 0;   break;
-    case KEY1:    return 1;   break;
-    case KEY2:    return 2;   break;
-    case KEY3:    return 3;   break;
-    case KEY4:    return 4;   break;
-    case KEY5:    return 5;   break;
-    case KEY6:    return 6;   break;
-    case KEY7:    return 7;   break;
-    case KEY8:    return 8;   break;
-    case KEY9:    return 9;   break;
-    default:                  break;
+    case FORWARD: dec = 'f'; return dec;   break;
+    case BACK:    dec = 'b'; return dec;   break;
+    case LEFT:    dec = 'l'; return dec;   break;
+    case RIGHT:   dec = 'r'; return dec;   break;
+    case STOP:    dec = 's'; return dec;   break;
+    case KEY0:    dec = '0'; return dec;   break;
+    case KEY1:    dec = '1'; return dec;   break;
+    case KEY2:    dec = '2'; return dec;   break;
+    case KEY3:    dec = '3'; return dec;   break;
+    case KEY4:    dec = '4'; return dec;   break;
+    case KEY5:    dec = '5'; return dec;   break;
+    case KEY6:    dec = '6'; return dec;   break;
+    case KEY7:    dec = '7'; return dec;   break;
+    case KEY8:    dec = '8'; return dec;   break;
+    case KEY9:    dec = '9'; return dec;   break;
+    default:                    break;
+  }
 }
+
+/*
+float car::regler(float ist, float soll, int p_faktor, ){
+  float abweichung = soll - ist;
+  float ergebnis  = (abweichung * p_factor);
+  return ergebnis;
+}
+*/

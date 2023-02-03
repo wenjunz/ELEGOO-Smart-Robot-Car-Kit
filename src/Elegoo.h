@@ -2,6 +2,8 @@
 #define car_H
 #include <Arduino.h>
 #include <Servo.h>
+#include <IRremote.h>
+
 
 //--------Ultrasonic Sensor---------//
 #define echo A4
@@ -44,13 +46,11 @@
 class car
 {
   public:
-    car();  //Constructor
+    car(int version);  //Constructor
     /**
     This is the functiom to Initialze the Library.
     Write the Version Number of your Robot into the brackets.
     */
-    void  init(int version);
-    void  init();
     void  forward(int speed);
     void  back(int speed);
     void  left(int speed);
@@ -73,7 +73,20 @@ class car
     int   getLightM();
     int   getLightL();
     void  line();
+    unsigned long getBT();
+    char getBTdec();
+    void delay(unsigned long time);
+    void remote();
+    float pregler(float ist, float soll, int p_faktor);
   private:
+    IRrecv *irrecv;
+    Servo  *libServo;
+    int in1 = 0;
+    int in2 = 0;
+    int in3 = 0;
+    int in4 = 0;
+    int ENA = 0;
+    int ENB = 0;
 };
 
 #if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_CAR)
