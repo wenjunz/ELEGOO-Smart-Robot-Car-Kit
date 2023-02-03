@@ -1,0 +1,3 @@
+[submodule "build/arduino"]
+	path = build/arduino
+	url = https://git.aerospace-lab.de/manuel.ulmer/elegoo
