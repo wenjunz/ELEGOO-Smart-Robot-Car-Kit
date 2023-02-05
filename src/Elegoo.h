@@ -1,6 +1,9 @@
 #ifndef car_H
 #define car_H
 #include <Arduino.h>
+#include <Servo.h>
+//#include <IRremote.h>
+
 
 //--------Ultrasonic Sensor---------//
 #define echo A4
@@ -8,6 +11,11 @@
 
 #define defaultVersion 3
 #define defaultSpeed 255
+
+//-------Line Tracking Pins--------//
+#define LineTeacking_Pin_Right  10
+#define LineTeacking_Pin_Middle 4
+#define LineTeacking_Pin_Left   2
 
 //---------- IR REMOTE -------------//
 #define RECV_PIN  12        //Infrared signal receiving pin
@@ -35,16 +43,14 @@
 #define KEY_HASH  16732845
 
 
-class car
+class elegoo
 {
   public:
-    car();  //Constructor
+    elegoo(int version);  //Constructor
     /**
     This is the functiom to Initialze the Library.
     Write the Version Number of your Robot into the brackets.
     */
-    void  init(int version);
-    void  init();
     void  forward(int speed);
     void  back(int speed);
     void  left(int speed);
@@ -59,11 +65,31 @@ class car
     void  backT(int speed, float time);
     void  leftT(int speed, float time);
     void  rightT(int speed, float time);
+    unsigned long getIR();
+    //char  getIRdec();
+    //void  remoteIR();
+    //void  remoteIRT(int time);
+    int   getLightR();
+    int   getLightM();
+    int   getLightL();
+    void  line();
+    unsigned long getBT();
+    char getBTdec();
+    void delay(unsigned long time);
+    void remote();
+    float regler(float ist, float soll, int p_faktor);
   private:
+    Servo  *libServo;
+    int in1 = 0;
+    int in2 = 0;
+    int in3 = 0;
+    int in4 = 0;
+    int ENA = 0;
+    int ENB = 0;
 };
 
-#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_CAR)
-extern car car;
-#endif
+//#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_CAR)
+//extern elegoo car;
+//#endif
 
 #endif
